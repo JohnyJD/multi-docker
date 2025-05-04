@@ -16,6 +16,7 @@ jobs:
         - name: Testing
           run: docker run -e CI=true johnyjd/client-test npm run test
   build:
+    needs: test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -32,6 +33,7 @@ jobs:
       - run: docker push johnyJd/multi-worker
       
   deploy:
+    needs: [test, build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
