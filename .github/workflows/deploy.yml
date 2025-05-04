@@ -11,23 +11,21 @@ jobs:
         - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
         
         - name: Building testing container
-        - run: docker build -t johnyjd/client-test -f ./client/Dockerfile.dev ./client
+          run: docker build -t johnyjd/client-test -f ./client/Dockerfile.dev ./client
         
         - name: Testing
-        - run: docker run -e CI=true johnyjd/client-test npm run test
+          run: docker run -e CI=true johnyjd/client-test npm run test
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
       
-      - name: Building images
       - run: docker build -t johnyJd/multi-client ./client
       - run: docker build -t johnyJd/multi-nginx ./nginx
       - run: docker build -t johnyJd/multi-server ./server
       - run: docker build -t johnyJd/multi-worker ./worker
 
-      - name: Pushing images to docker hub
       - run: docker push johnyJd/multi-client
       - run: docker push johnyJd/multi-nginx
       - run: docker push johnyJd/multi-server
