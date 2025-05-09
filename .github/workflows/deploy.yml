@@ -45,8 +45,8 @@ jobs:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
           application_name: ${{ vars.AWS_APP_NAME }}
-          environment_name: ${{ vars.AWS_APP_NAME }}
-          existing_bucket_name: elaselasticbeanstalk-eu-north-1-322209956507
-          region: eu-north-1
+          environment_name: ${{ vars.AWS_ENV_NAME }}
+          existing_bucket_name: ${{ vars.AWS_BUCKET_NAME }}
+          region: ${{ vars.AWS_REGION }}
           version_label: ${{ github.sha }}
           deployment_package: deploy.zip
